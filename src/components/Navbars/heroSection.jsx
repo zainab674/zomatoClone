@@ -1,11 +1,63 @@
 import React from 'react';
 import { IoLocationSharp } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi'; // Import menu and close icons
+import SignupForm from '../../pages/auth/Signup';
+import SignInPage from '../../pages/auth/signin';
 
-const HeroSection = () => {
+
+import { useNavigate } from 'react-router-dom';
+import { apiConst } from '../../constants/api.constants';
+
+const HeroSection = ({ page }) => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+    };
+
+    const closeLoginModal = () => {
+        setIsLoginModalOpen(false);
+    };
+
+    useEffect(() => {
+        if (page === "signup") {
+            openModal();
+        }
+        if (page === "login") {
+            openLoginModal();
+        }
+    }, [page]);
+
+    const onHome = () => {
+
+        navigate(apiConst.Home)
+    }
+    const onAdd = () => {
+
+        navigate(apiConst.AddRestaurant)
+    }
+    const onLogin = () => {
+
+        navigate(apiConst.Login.replace(':page', 'login'))
+    }
+    const onSignup = () => {
+
+        navigate(apiConst.Signup.replace(':page', 'signup'))
+    }
     return (
         <div className="relative bg-cover bg-center h-[70vh] z-49" style={{ backgroundImage: 'url("https://www.usatoday.com/gcdn/presto/2022/08/19/USAT/f2871962-4672-46f8-b5a2-b54a670307b4-GettyImages-1149135424.jpg?crop=2021,1137,x0,y170&width=660&height=371&format=pjpg&auto=webp")' }}>
             <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -34,10 +86,10 @@ const HeroSection = () => {
 
                         {/* Menu items */}
                         <ul className="flex flex-col items-center">
-                            <li className="mb-4 text-black">Investor Relations</li>
-                            <li className="mb-4 text-black">Add restaurant</li>
-                            <li className="mb-4 text-black">Log in</li>
-                            <li className="mb-4 text-black">Sign up</li>
+                            <li className="mb-4 text-black hover:cursor-pointer">Investor Relations</li>
+                            <li className="mb-4 text-black hover:cursor-pointer" onClick={onAdd}>Add restaurant</li>
+                            <li className="mb-4 text-black hover:cursor-pointer" onClick={openLoginModal}>Log in</li>
+                            <li className="mb-4 text-black hover:cursor-pointer" onClick={openModal}>Sign up</li>
                         </ul>
                     </div>
                 </div>
@@ -50,10 +102,10 @@ const HeroSection = () => {
                     </div>
                     <div>
                         <ul className="flex space-x-4 ">
-                            <li className="mb-2 sm:mb-0">Investor Relations</li>
-                            <li className="mb-2 sm:mb-0">Add restaurant</li>
-                            <li className="mb-2 sm:mb-0">Log in</li>
-                            <li className="mb-2 sm:mb-0">Sign up</li>
+                            <li className="mb-2 sm:mb-0 hover:cursor-pointer">Investor Relations</li>
+                            <li className="mb-2 sm:mb-0 hover:cursor-pointer" onClick={onAdd}>Add restaurant</li>
+                            <li className="mb-2 sm:mb-0 hover:cursor-pointer" onClick={openLoginModal}>Log in</li>
+                            <li className="mb-2 sm:mb-0 hover:cursor-pointer" onClick={openModal}>Sign up</li>
                         </ul>
                     </div>
                 </div>
@@ -92,6 +144,9 @@ const HeroSection = () => {
                     </div>
                 </div>
             </div>
+            <SignupForm isOpen={isModalOpen} onClose={closeModal} />
+            <SignInPage isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+
         </div>
     );
 };

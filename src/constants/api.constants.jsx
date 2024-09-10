@@ -37,6 +37,10 @@ export const apiConst = {
 
 
   //
+  Home: '/',
+  Login: '/:page',
+  Signup: '/:page',
   Restaurants: '/Restaurants/:id',
   RestaurantDetail: '/RestaurantDetails/:id',
+  AddRestaurant: '/AddRestaurant'
 };

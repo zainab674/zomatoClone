@@ -4,7 +4,7 @@ import { FaThumbsUp, FaComment, FaShare } from "react-icons/fa";
 const ReviewCard = ({ card }) => {
     console.log('datttttttt', card)
     return (
-        <div className="max-w-xl  bg-white shadow-md rounded-lg p-4 my-6">
+        <div className="max-w-xl  bg-white shadow-md rounded-lg md:p-4 my-6">
             {/* Reviewer Info */}
             <div className="flex items-center justify-between  mb-4">
                 <div className="flex space-x-4 items-center">

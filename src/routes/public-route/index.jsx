@@ -1,4 +1,4 @@
-import { Restaurants, SignInPage } from '../../pages';
+import { AddRes, Restaurants, SignInPage } from '../../pages';
 import SignupForm from '../../pages/auth/Signup';
 import ForgotPasswordPage from '../../pages/auth/forgot';
 import { HomePage } from '../../pages';
@@ -6,13 +6,13 @@ import { RestaurantDetails } from '../../pages';
 const authenticatedRoutes = [
   {
     key: 0,
-    path: '/signin',
-    element: SignInPage,
+    path: '/:page',
+    element: HomePage,
   },
   {
     key: 1,
-    path: '/signup',
-    element: SignupForm,
+    path: '/AddRestaurant',
+    element: AddRes,
   },
   {
     key: 2,

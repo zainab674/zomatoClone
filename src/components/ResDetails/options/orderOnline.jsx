@@ -125,6 +125,7 @@ const cats = [
             { name: 'Sandesh', rating: 4, price: '$3', img: 'https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg' },
         ],
     },
+
     {
         name: 'Momos',
         dishes: [
@@ -172,6 +173,7 @@ const cats = [
             { name: 'Panna Cotta', rating: 5, price: '$6', img: 'panna-cotta.jpg' },
         ],
     },
+
 ];
 
 
@@ -198,19 +200,72 @@ const OrderOnline = () => {
     }, [id]);
 
 
-    const [activeCategory, setActiveCategory] = useState(cats[1].name);
+    const [activeCategory, setActiveCategory] = useState(cats[0].name);
 
 
-    const categoryRefs = useRef({});
+    // const categoryRefs = useRef({});
+    const sectionRefs = useRef({});
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveCategory(entry.target.dataset.category);
+                }
+            });
+        }, { threshold: 0.2 });
 
-    // Function to handle click and scroll
-    const handleCategoryClick = (categoryName) => {
-        setActiveCategory(categoryName);
-        const ref = categoryRefs.current[categoryName];
-        if (ref) {
-            ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        Object.values(sectionRefs.current).forEach(section => {
+            observer.observe(section);
+        });
+
+        return () => {
+            Object.values(sectionRefs.current).forEach(section => {
+                // observer.unobserve(section);
+                if (section) observer.unobserve(section);
+            });
+        };
+    }, []);
+
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver((entries) => {
+    //         entries.forEach(entry => {
+    //             if (entry.isIntersecting) {
+    //                 setActiveCategory(entry.target.dataset.category);
+    //             }
+    //         });
+    //     }, { threshold: 0.2 });
+
+    //     // Observe only non-null elements
+    //     Object.values(sectionRefs.current).forEach(section => {
+    //         if (section) observer.observe(section);
+    //     });
+
+    //     return () => {
+    //         // Unobserve only non-null elements and reset sectionRefs
+    //         Object.values(sectionRefs.current).forEach(section => {
+    //             if (section) observer.unobserve(section);
+    //         });
+    //         sectionRefs.current = {}; // Reset sectionRefs on unmount
+    //     };
+    // }, []);
+
+
+
+    const handleCategoryClick = (category) => {
+        setActiveCategory(category);
+        const section = sectionRefs.current[category];
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
+
+    // const handleCategoryClick = (categoryName) => {
+    //     setActiveCategory(categoryName);
+    //     const ref = categoryRefs.current[categoryName];
+    //     if (ref) {
+    //         ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    //     }
+    // };
     if (!card) return <div>Loading...</div>;
     return (
         <>
@@ -255,7 +310,9 @@ const OrderOnline = () => {
                         <div
                             key={category.name}
                             className="mb-10"
-                            ref={(el) => (categoryRefs.current[category.name] = el)}
+                            // ref={(el) => (categoryRefs.current[category.name] = el)}
+                            ref={(el) => (sectionRefs.current[category.name] = el)}
+                            data-category={category.name}
                         >
                             <h3 className="text-xl font-medium mb-4">{category.name}</h3>
                             {category.dishes.map((dish) => (

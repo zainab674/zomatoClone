@@ -37,8 +37,8 @@ const SectionCards = () => {
                     }
                     onClick={() => dining(1)}
                 >
-                    <p className='text-xl text-gray-700 font-medium mt-0'>Order Online</p>
-                    <p className='text-lg text-gray-500 '>Stay home and order to your doorstep</p>
+                    <p className='text-sm md:text-xl text-gray-700 font-medium mt-0'>Order Online</p>
+                    <p className='textxs md:text-lg text-gray-500  '>Stay home and order to your doorstep</p>
                 </Card>
             </Col>
             <Col span={10} style={{ margin: '0 10px' }}>
@@ -61,8 +61,8 @@ const SectionCards = () => {
 
                     onClick={() => dining(2)}
                 >
-                    <p className='text-xl text-gray-700 font-medium mt-0'>Dining</p>
-                    <p className='text-lg text-gray-500 '>View the city's favourite dining venues</p>
+                    <p className='text-sm md:text-xl text-gray-700 font-medium mt-0'>Dining</p>
+                    <p className='text-xs md:text-lg text-gray-500 '>View the city's favourite dining venues</p>
                 </Card>
             </Col>
         </Row>

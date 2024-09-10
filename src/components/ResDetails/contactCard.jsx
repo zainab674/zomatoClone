@@ -29,11 +29,24 @@ const ContactCard = () => {
 
             <h2 className="mt-10 font-semibold mb-2">Direction</h2>
             <div className="mb-4">
-                <img
+                {/* <img
+
                     src="https://www.openstreetmap.org/export/embed.html?bbox=73.87911891937257%2C30.19836845145418%2C73.8899486064911%2C30.20766103492345&layer=mapnik"
                     alt="map"
                     className="rounded-lg"
-                />
+                /> */}
+                <iframe
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=73.87911891937257%2C30.19836845145418%2C73.8899486064911%2C30.20766103492345&layer=mapnik"
+                    width="100%"
+                    height="400"
+                    frameborder="0"
+                    scrolling=""
+                    marginheight="0"
+                    marginwidth="0"
+                    className="rounded-lg"
+                    title="OpenStreetMap"
+                ></iframe>
+
                 <p className="mt-2 text-sm text-gray-700">
                     236, Mukharjee Nagar, Sri Ganganagar Locality, Sri Ganganagar
                 </p>

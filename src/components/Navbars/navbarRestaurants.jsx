@@ -5,10 +5,38 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { HiMenu, HiX } from 'react-icons/hi'; // Import menu and close icons
+import SignupForm from '../../pages/auth/Signup';
+import SignInPage from '../../pages/auth/signin';
 
-
+import { useNavigate } from 'react-router-dom';
+import { apiConst } from '../../constants/api.constants';
 const NavBar = () => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+    };
+
+    const closeLoginModal = () => {
+        setIsLoginModalOpen(false);
+    };
+
+    const onHome = () => {
+
+        navigate(apiConst.Home)
+    }
+
 
     return (
 
@@ -22,7 +50,7 @@ const NavBar = () => {
                 >
                     {isOpen ? <HiX size={24} className='text-black' /> : <HiMenu size={24} className='text-black' />}
                 </button>
-                <h1 className="text-4xl font-extrabold mt-2 mb-4 italic mr-5" >zomato</h1>
+                <h1 className="text-4xl font-extrabold mt-2 mb-4 italic mr-5 hover:cursor-pointer" onClick={onHome} >zomato</h1>
             </div>
 
             {/* Mobile menu */}
@@ -33,23 +61,23 @@ const NavBar = () => {
                 <div className="flex flex-col p-5">
                     {/* Get The App */}
                     <div className="flex justify-center mb-6">
-                        <p className="text-sm sm:text-lg text-black">Get The App</p>
+                        <p className="text-sm sm:text-lg text-black hover:cursor-pointer">Get The App</p>
                     </div>
 
 
                     {/* Menu items */}
                     <ul className="flex flex-col items-center">
-                        <li className="mb-4 text-black">Investor Relations</li>
-                        <li className="mb-4 text-black">Add restaurant</li>
-                        <li className="mb-4 text-black">Log in</li>
-                        <li className="mb-4 text-black">Sign up</li>
+                        <li className="mb-4 text-black hover:cursor-pointer">Investor Relations</li>
+                        <li className="mb-4 text-black hover:cursor-pointer">Add restaurant</li>
+                        <li className="mb-4 text-black hover:cursor-pointer" onClick={openLoginModal}>Log in</li>
+                        <li className="mb-4 text-black hover:cursor-pointer" onClick={openModal}>Sign up</li>
                     </ul>
                 </div>
             </div>
             {/* //Desktop menu */}
             <div className='hidden md:flex  items-center md:px-20 px-1 pt-3 justify-between'>
                 <div className="left flex items-center">
-                    <h1 className="text-xl md:text-4xl font-extrabold mt-2 mb-4 italic mr-5" >zomato</h1>
+                    <h1 className="text-xl md:text-4xl font-extrabold mt-2 mb-4 italic mr-5" onClick={onHome} >zomato</h1>
                     <div className="flex items-center bg-white  rounded-lg overflow-hidden">
                         <div className="flex items-center px-2 py-2 w-auto">
                             <IoLocationSharp className="text-red-400 text-2xl" />
@@ -77,8 +105,8 @@ const NavBar = () => {
                 <div className="right">
                     <ul className="flex space-x-4  text-gray-500">
 
-                        <li className="mb-2 sm:mb-0">Log in</li>
-                        <li className="mb-2 sm:mb-0">Sign up</li>
+                        <li className="mb-2 sm:mb-0 hover:cursor-pointer" onClick={openLoginModal}>Log in</li>
+                        <li className="mb-2 sm:mb-0 hover:cursor-pointer" onClick={openModal}>Sign up</li>
                     </ul>
                 </div>
             </div>
@@ -87,7 +115,8 @@ const NavBar = () => {
             <p className='text-gray-500 text-xs px-16 mt-8 '><span className='hover:text-rose-500'>Home</span> / <span className='hover:text-rose-500'>India</span> / <span className='hover:text-rose-500'>Sri Ganganagar</span>  / <span className='text-gray-400 hover:text-rose-500'>Sri Ganganagar Locality Restaurants</span> </p>
 
 
-
+            <SignupForm isOpen={isModalOpen} onClose={closeModal} />
+            <SignInPage isOpen={isLoginModalOpen} onClose={closeLoginModal} />
 
         </>
     )

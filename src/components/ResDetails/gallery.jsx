@@ -20,7 +20,7 @@ const Gallery = () => {
 
     return (
         <div className='md:mx-20 mt-10'>
-            <div className="grid grid-cols-3 gap-4 h-full w-full" id='photos'>
+            <div className="md:grid grid-cols-3 gap-4 h-full w-full" id='photos'>
                 {/* Large Image */}
                 <div className="col-span-2 h-80">
                     <img
@@ -31,7 +31,7 @@ const Gallery = () => {
                 </div>
 
                 {/* Smaller Images */}
-                <div className="grid grid-rows-2 gap-4 h-80">
+                <div className="md:grid grid-rows-2 gap-4 h-80 hidden ">
                     <div className="grid grid-cols-2 gap-4 ">
                         <img
                             src={card.images[1]}

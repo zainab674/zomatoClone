@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 
-const CategoryCrousel = ({ Menu }) => {
+const CardCrousel = ({ Menu }) => {
     const scrollContainerRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -34,38 +34,44 @@ const CategoryCrousel = ({ Menu }) => {
         container.addEventListener('scroll', checkScrollPosition);
 
         return () => {
+            2
             container.removeEventListener('scroll', checkScrollPosition);
         };
     }, []);
 
     return (
-        <div className="bg-white py-4 w-full flex items-center md:px-20">
+        <div className="bg-white py-4 w-9/12 mx-auto flex items-center relative">
             {/* Left arrow button */}
             {canScrollLeft && (
                 <button
                     onClick={scrollLeft}
-                    className="p-2 absolute left-0 ml-7 md:ml-10 lg:ml-14 z-10 items-center hidden md:flex"
+                    className="absolute left-0 p-2 z-10 flex items-center"
+                    style={{ marginLeft: '-2.5rem' }} // Adjust the margin to ensure no extra space
                 >
                     <IoIosArrowDropleft className="text-gray-500 text-4xl" />
                 </button>
             )}
 
             {/* Scrollable Menu */}
-            <div className="flex-1 flex overflow-hidden md:mx-2 mx-0 md:mr-3 md:ml-2 mt-4 relative">
+            <div className="flex flex-grow overflow-hidden relative">
                 <ul
                     ref={scrollContainerRef}
-                    className="flex overflow-x-auto scrollbar-hide"
+                    className="flex overflow-x-auto scrollbar-hide space-x-4"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {Menu.map((item) => (
-                        <li key={item.id} className="mx-7">
-                            <div className="flex-shrink-0 w-32 transition-transform duration-300 transform">
+                        <li key={item.id} className="flex-shrink-0 mx-5">
+                            <div className="w-64 bg-white shadow-lg rounded-lg transition-transform duration-300 transform">
                                 <img
                                     src={item.img}
                                     alt={item.name}
-                                    className="w-32 h-32 object-cover rounded-full"
+                                    className="w-full h-40 object-cover rounded-t-lg"
                                 />
-                                <p className="mt-2 text-center text-lg">{item.name}</p>
+                                <div className="p-4">
+                                    <h3 className="text-xl font-medium mb-2">{item.name}</h3>
+                                    <h4 className="text-sm text-gray-500 mb-2">{item.desc}</h4>
+                                    <h1 className='text-lg text-blue-500'>Learn More </h1>
+                                </div>
                             </div>
                         </li>
                     ))}
@@ -76,14 +82,14 @@ const CategoryCrousel = ({ Menu }) => {
             {canScrollRight && (
                 <button
                     onClick={scrollRight}
-                    className="p-2 absolute right-0 md:mr-10 lg:mr-8 mr-0 mb-2 z-10 items-center hidden md:flex"
+                    className="absolute right-0 p-2 z-10 flex items-center"
+                    style={{ marginRight: '-2.5rem' }} // Adjust the margin to ensure no extra space
                 >
-                    <IoIosArrowDropright className="text-gray-500 bg-white rounded-full text-4xl" />
+                    <IoIosArrowDropright className="text-gray-500 text-4xl" />
                 </button>
             )}
         </div>
     );
-
 };
 
-export default CategoryCrousel;
+export default CardCrousel;

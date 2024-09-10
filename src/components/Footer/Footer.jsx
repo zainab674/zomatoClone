@@ -32,7 +32,7 @@ const Footer = () => {
                                 >
                                     <span className="flex items-center">
                                         <img
-                                            src="path_to_india_flag.png" // Replace with the actual path to the flag image
+                                            src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" // Replace with the actual path to the flag image
                                             alt="India Flag"
                                             className="w-4 h-4 mr-1"
                                         />
